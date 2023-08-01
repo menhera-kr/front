@@ -8,12 +8,7 @@ export const Root = styled.div`
 
     display: flex;
     box-sizing: border-box;
-
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 10;
+    flex: 0 0 ${({ theme }) => theme.spacing(6)};
 
     background-color: #f5e0fb;
     box-shadow: 0px -2px 0px #fafff9;
