@@ -21,4 +21,19 @@ describe("<Window />", () => {
         const title = screen.getByText("Title");
         expect(title).toBeInTheDocument();
     });
+
+    it("should be able to render with maximum width", () => {
+        render(
+            <Window title="Title" maxWidth="md">
+                Root
+            </Window>,
+            { wrapper: Wrapper },
+        );
+
+        const root = screen.getByTestId("window");
+        expect(root).toBeInTheDocument();
+        expect(root).toHaveStyle({
+            margin: "0 auto",
+        });
+    });
 });

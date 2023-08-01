@@ -1,7 +1,11 @@
 import styled from "@emotion/styled";
+import { WindowProps } from "@components/Window";
 
-export const Root = styled.div`
-    margin: 0;
+export const Root = styled.div<{ maxWidth?: WindowProps["maxWidth"] }>`
+    width: 100%;
+    max-width: ${({ theme, maxWidth }) => (maxWidth ? `${theme.breakpoints.values[maxWidth]}px` : "none")};
+
+    margin: ${({ maxWidth }) => (maxWidth ? "0 auto" : "none")};
     padding: ${({ theme }) => theme.spacing(0.5)};
     border: 2px solid ${({ theme }) => theme.palette.primary.main};
 

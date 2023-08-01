@@ -4,7 +4,7 @@ import { Window } from "@components/Window";
 
 export default function Index() {
     return (
-        <Window title="mehera.kr">
+        <Window maxWidth="xl" title="mehera.kr">
             <Box py={8}>
                 <Typography variant="h2" textAlign="center">
                     menhera.kr

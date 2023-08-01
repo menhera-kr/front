@@ -1,16 +1,18 @@
 import React from "react";
+import Image from "next/image";
+
+import { Box, Typography } from "@mui/material";
 
 import { Content, Icon, InnerContent, Root, TitleBar } from "@components/Window.styles";
-import { Box, Typography } from "@mui/material";
-import Image from "next/image";
 
 export interface WindowProps {
     title: string;
+    maxWidth?: "xs" | "sm" | "md" | "lg" | "xl";
 }
 
-export function Window({ title, children }: React.PropsWithChildren<WindowProps>) {
+export function Window({ title, children, maxWidth }: React.PropsWithChildren<WindowProps>) {
     return (
-        <Root>
+        <Root data-testid="window" maxWidth={maxWidth}>
             <TitleBar>
                 <Icon />
                 <Typography variant="body1" color="primary.main" lineHeight={1} sx={{ ml: 1 }}>
