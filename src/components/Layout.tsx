@@ -2,7 +2,8 @@ import React from "react";
 
 import { Global } from "@emotion/react";
 
-import { GlobalStyles, Root } from "@components/Layout.styles";
+import { TaskBar } from "@components/TaskBar";
+import { GlobalStyles, Main, Root } from "@components/Layout.styles";
 
 export interface LayoutProps {}
 
@@ -10,7 +11,8 @@ export function Layout({ children }: React.PropsWithChildren<LayoutProps>) {
     return (
         <Root>
             <Global styles={GlobalStyles} />
-            {children}
+            <Main>{children}</Main>
+            <TaskBar />
         </Root>
     );
 }
