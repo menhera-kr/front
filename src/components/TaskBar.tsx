@@ -13,7 +13,7 @@ export interface TaskBarProps {}
 
 export function TaskBar({}: TaskBarProps) {
     return (
-        <Root>
+        <Root data-testid="taskbar">
             <Button
                 variant="centered"
                 minWidth={138}

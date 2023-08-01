@@ -29,10 +29,10 @@ export function Button({ children, startIcon, variant = "default", minWidth, max
                 lineHeight={1}
                 fontSize="1.1rem"
                 textAlign={variant === "centered" ? "center" : "left"}
-                sx={{ width: "100%" }}
                 whiteSpace="nowrap"
                 overflow="hidden"
                 textOverflow="ellipsis"
+                sx={{ width: "100%" }}
             >
                 {children}
             </Typography>
