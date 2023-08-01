@@ -1,6 +1,7 @@
 import React from "react";
 import dayjs from "dayjs";
-import { TaskBarPanel } from "@components/TaskBarPanel";
+
+import { TaskBarPanel } from "@components/TaskBar/Panel";
 
 export function TaskBarClock() {
     const [time, setTime] = React.useState(new Date());

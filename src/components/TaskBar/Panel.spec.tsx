@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 
-import { TaskBarPanel } from "@components/TaskBarPanel";
+import { TaskBarPanel } from "@components/TaskBar/Panel";
 import { Wrapper } from "@components/__test__/Wrapper";
 
 describe("<TaskBarPanel />", () => {

@@ -1,11 +1,11 @@
 import { render, screen } from "@testing-library/react";
 
-import { Divider } from "@components/Divider";
+import { TaskBarDivider } from "@components/TaskBar/Divider";
 import { Wrapper } from "@components/__test__/Wrapper";
 
-describe("<Divider />", () => {
-    it("should render Divider component properly", () => {
-        render(<Divider data-testid="root" />, {
+describe("<TaskBarDivider />", () => {
+    it("should render TaskBarDivider component properly", () => {
+        render(<TaskBarDivider data-testid="root" />, {
             wrapper: Wrapper,
         });
 

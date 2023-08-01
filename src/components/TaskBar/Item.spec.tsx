@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 
-import { TaskBarItem } from "@components/TaskBarItem";
+import { TaskBarItem } from "@components/TaskBar/Item";
 import { Wrapper } from "@components/__test__/Wrapper";
 
 describe("<TaskBarItem />", () => {

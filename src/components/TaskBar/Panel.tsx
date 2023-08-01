@@ -1,7 +1,8 @@
 import React from "react";
 
-import { Root } from "./TaskBarPanel.styles";
 import { Typography } from "@mui/material";
+
+import { Root } from "@components/TaskBar/Panel.styles";
 
 export interface TaskBarPanelProps {
     children: string;

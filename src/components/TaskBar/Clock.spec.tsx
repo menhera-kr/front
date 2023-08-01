@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "@testing-library/react";
 
-import { TaskBarClock } from "@components/TaskBarClock";
+import { TaskBarClock } from "@components/TaskBar/Clock";
 import { Wrapper } from "@components/__test__/Wrapper";
 import dayjs from "dayjs";
 

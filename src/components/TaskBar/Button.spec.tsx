@@ -2,12 +2,12 @@ import React from "react";
 
 import { render, screen } from "@testing-library/react";
 
-import { Button } from "@components/Button";
+import { TaskBarButton } from "@components/TaskBar/Button";
 import { Wrapper } from "@components/__test__/Wrapper";
 
 describe("<Button />", () => {
     it("should render Button component properly", () => {
-        render(<Button>Button</Button>, {
+        render(<TaskBarButton>Button</TaskBarButton>, {
             wrapper: Wrapper,
         });
 
@@ -16,7 +16,7 @@ describe("<Button />", () => {
     });
 
     it("should render startIcon prop properly", () => {
-        render(<Button startIcon={<span>Icon</span>}>Button</Button>, {
+        render(<TaskBarButton startIcon={<span>Icon</span>}>Button</TaskBarButton>, {
             wrapper: Wrapper,
         });
 
@@ -25,7 +25,7 @@ describe("<Button />", () => {
     });
 
     it("should render with 'centered' variant properly", () => {
-        render(<Button variant="centered">Button</Button>, {
+        render(<TaskBarButton variant="centered">Button</TaskBarButton>, {
             wrapper: Wrapper,
         });
 

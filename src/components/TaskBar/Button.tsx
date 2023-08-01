@@ -2,7 +2,7 @@ import React from "react";
 
 import { Box, Typography } from "@mui/material";
 
-import { Root } from "./Button.styles";
+import { Root } from "@components/TaskBar/Button.styles";
 
 export type ButtonVariant = "centered" | "default";
 
@@ -15,7 +15,7 @@ export interface ButtonProps {
     active?: boolean;
 }
 
-export function Button({ children, startIcon, variant = "default", minWidth, maxWidth, active }: ButtonProps) {
+export function TaskBarButton({ children, startIcon, variant = "default", minWidth, maxWidth, active }: ButtonProps) {
     return (
         <Box component={Root} minWidth={minWidth} maxWidth={maxWidth} aria-pressed={active}>
             {startIcon && (
