@@ -7,6 +7,7 @@ import { Button } from "@components/Button";
 import { Divider } from "@components/Divider";
 import { Root } from "@components/TaskBar.styles";
 import { TaskBarItem } from "@components/TaskBarItem";
+import { TaskBarClock } from "@components/TaskBarClock";
 
 export interface TaskBarProps {}
 
@@ -24,6 +25,8 @@ export function TaskBar({}: TaskBarProps) {
                 <Divider />
             </Box>
             <TaskBarItem active>Index</TaskBarItem>
+            <Box flex="1 1 auto" />
+            <TaskBarClock />
         </Root>
     );
 }
