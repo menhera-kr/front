@@ -1,7 +1,14 @@
 import styled from "@emotion/styled";
 
-export const Root = styled.div`
-    margin: 0;
+export type RootProps = {
+    maxWidth?: "xs" | "sm" | "md" | "lg" | "xl" | false;
+};
+
+export const Root = styled.div<RootProps>`
+    width: 100%;
+    max-width: ${({ theme, maxWidth }) => (maxWidth ? theme.breakpoints.values[maxWidth] : "none")}px;
+
+    margin: 0 auto;
     padding: ${({ theme }) => theme.spacing(0.5)};
     border: 2px solid ${({ theme }) => theme.palette.primary.main};
 

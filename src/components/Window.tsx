@@ -6,11 +6,12 @@ import Image from "next/image";
 
 export interface WindowProps {
     title: string;
+    maxWidth?: "xs" | "sm" | "md" | "lg" | "xl" | false;
 }
 
-export function Window({ title, children }: React.PropsWithChildren<WindowProps>) {
+export function Window({ title, children, maxWidth }: React.PropsWithChildren<WindowProps>) {
     return (
-        <Root>
+        <Root maxWidth={maxWidth}>
             <TitleBar>
                 <Icon />
                 <Typography variant="body1" color="primary.main" lineHeight={1} sx={{ ml: 1 }}>

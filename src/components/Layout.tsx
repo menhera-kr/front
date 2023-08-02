@@ -2,6 +2,7 @@ import React from "react";
 
 import { Global } from "@emotion/react";
 
+import { Window } from "@components/Window";
 import { TaskBar } from "@components/TaskBar";
 import { GlobalStyles, Main, Root } from "@components/Layout.styles";
 
@@ -11,7 +12,11 @@ export function Layout({ children }: React.PropsWithChildren<LayoutProps>) {
     return (
         <Root>
             <Global styles={GlobalStyles} />
-            <Main>{children}</Main>
+            <Main>
+                <Window title="menhera.kr" maxWidth="lg">
+                    {children}
+                </Window>
+            </Main>
             <TaskBar />
         </Root>
     );
