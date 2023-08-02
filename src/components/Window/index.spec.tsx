@@ -52,4 +52,17 @@ describe("<Window />", () => {
 
         expect(onClose).toHaveBeenCalled();
     });
+
+    it("should render with custom z-index property", () => {
+        render(
+            <Window title="Title" z={100}>
+                Root
+            </Window>,
+            { wrapper: Wrapper },
+        );
+
+        const root = screen.getByTestId("window");
+        expect(root).toBeInTheDocument();
+        expect(root).toHaveStyle({ zIndex: 100 });
+    });
 });

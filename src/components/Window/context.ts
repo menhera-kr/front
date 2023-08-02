@@ -7,6 +7,8 @@ type RequiredFieldsOnly<T> = {
 export type OpenWindowArgs<TProps> = keyof RequiredFieldsOnly<TProps> extends never ? [] : [props: TProps];
 export interface WindowContextValues {
     openWindow<TProps>(component: React.ComponentType<TProps>, title: string, ...rest: OpenWindowArgs<TProps>): void;
+    setFocus(id: string): void;
+    focusedId: string | null;
 }
 
 export const WindowContext = React.createContext<WindowContextValues | null>(null);

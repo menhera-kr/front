@@ -5,14 +5,16 @@ import { Box, Typography } from "@mui/material";
 import { useDraggable } from "@dnd-kit/core";
 
 import { CloseButton, Content, FloatRoot, Icon, InnerContent, Root, TitleBar } from "@components/Window/index.styles";
+import { useWindow } from "@components/Window/context";
 
-export interface WindowProps {
+export interface WindowProps extends React.HTMLAttributes<HTMLDivElement> {
     id?: string;
     title: string;
     maxWidth?: "xs" | "sm" | "md" | "lg" | "xl";
     variant?: "static" | "float";
     x?: number;
     y?: number;
+    z?: number;
     onClose?(): void;
 }
 
@@ -25,11 +27,16 @@ export function Window({
     onClose,
     x = 0,
     y = 0,
+    z = 0,
+    ...rest
 }: React.PropsWithChildren<WindowProps>) {
     const RootComponent = variant === "float" ? FloatRoot : Root;
+    const currentId = id ?? "fixed";
     const { attributes, listeners, setNodeRef, transform } = useDraggable({
-        id: id ?? "fixed",
+        id: currentId,
     });
+
+    const { setFocus, focusedId } = useWindow();
 
     const posX = x + (transform?.x ?? 0);
     const posY = y + (transform?.y ?? 0);
@@ -51,8 +58,26 @@ export function Window({
         e.stopPropagation();
     }, []);
 
+    const moveWindowFocus = React.useCallback(() => {
+        if (currentId === focusedId) {
+            return;
+        }
+
+        setFocus(currentId);
+    }, [currentId, setFocus, focusedId]);
+
     return (
-        <RootComponent ref={setNodeRef} data-testid="window" maxWidth={maxWidth} style={{ top: posY, left: posX }}>
+        <RootComponent
+            ref={setNodeRef}
+            data-testid="window"
+            maxWidth={maxWidth}
+            style={{ top: posY, left: posX }}
+            onFocus={moveWindowFocus}
+            onMouseDown={moveWindowFocus}
+            isFocused={currentId === focusedId}
+            zIndex={z}
+            {...rest}
+        >
             <TitleBar {...listeners} {...attributes}>
                 <Icon />
                 <Typography variant="body1" color="primary.main" lineHeight={1} sx={{ ml: 1 }}>

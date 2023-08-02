@@ -31,7 +31,7 @@ describe("useWindow()", () => {
         const openWindow = jest.fn();
 
         render(
-            <WindowContext.Provider value={{ openWindow }}>
+            <WindowContext.Provider value={{ openWindow, focusedId: null, setFocus: jest.fn() }}>
                 <MockComponent />
             </WindowContext.Provider>,
         );

@@ -1,33 +1,11 @@
 import styled from "@emotion/styled";
 import { WindowProps } from "@components/Window";
 
-type RootProps = { maxWidth?: WindowProps["maxWidth"] };
-
-export const Root = styled.div<RootProps>`
-    width: 100%;
-    max-width: ${({ theme, maxWidth }) => (maxWidth ? `${theme.breakpoints.values[maxWidth]}px` : "none")};
-
-    margin: ${({ maxWidth }) => (maxWidth ? "0 auto" : "none")};
-    padding: ${({ theme }) => theme.spacing(0.5)};
-    border: 2px solid ${({ theme }) => theme.palette.primary.main};
-
-    display: flex;
-    flex-direction: column;
-    flex: 1 1 auto;
-
-    background: #88f5e0;
-    box-shadow: 4px 4px 0 0 rgba(0, 0, 0, 0.2);
-`;
-
-export const FloatRoot = styled(Root)<RootProps>`
-    width: auto;
-    min-width: 360px;
-    max-width: none;
-
-    position: fixed;
-    top: 0;
-    left: 0;
-`;
+type RootProps = {
+    maxWidth?: WindowProps["maxWidth"];
+    isFocused?: boolean;
+    zIndex?: number;
+};
 
 export const Content = styled.div`
     margin: 0;
@@ -63,8 +41,6 @@ export const TitleBar = styled.div`
     display: flex;
     align-items: center;
 
-    background-color: #edc9ed;
-
     user-select: none;
 `;
 
@@ -95,4 +71,36 @@ export const CloseButton = styled.button`
     &:focus-visible {
         filter: brightness(2.5);
     }
+`;
+
+export const Root = styled.div<RootProps>`
+    width: 100%;
+    max-width: ${({ theme, maxWidth }) => (maxWidth ? `${theme.breakpoints.values[maxWidth]}px` : "none")};
+
+    margin: ${({ maxWidth }) => (maxWidth ? "0 auto" : "none")};
+    padding: ${({ theme }) => theme.spacing(0.5)};
+    border: 2px solid ${({ theme }) => theme.palette.primary.main};
+
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+
+    z-index: ${({ zIndex }) => zIndex ?? 0};
+
+    background: ${({ isFocused }) => (isFocused ? "#88f5e0" : "#e2e2e0")};
+    box-shadow: ${({ isFocused }) => (isFocused ? "4px 4px 0 0 rgba(0, 0, 0, 0.2)" : "none")};
+
+    ${TitleBar} {
+        background-color: ${({ isFocused }) => (isFocused ? "#edc9ed" : "#e2e2e0")};
+    }
+`;
+
+export const FloatRoot = styled(Root)<RootProps>`
+    width: auto;
+    min-width: 360px;
+    max-width: none;
+
+    position: fixed;
+    top: 0;
+    left: 0;
 `;

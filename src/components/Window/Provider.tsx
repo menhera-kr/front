@@ -25,15 +25,37 @@ export interface WindowItem<TProps> {
 }
 
 export function WindowProvider({ children }: React.PropsWithChildren) {
+    const [focusedId, setFocusedId] = React.useState<string | null>(null);
     const mouseSensor = useSensor(MouseSensor, {});
     const touchSensor = useSensor(TouchSensor, {});
     const keyboardSensor = useSensor(KeyboardSensor, {});
     const sensors = useSensors(mouseSensor, touchSensor, keyboardSensor);
     const id = React.useId();
+    const previousWindowCount = React.useRef(0);
 
     const [windows, setWindows] = React.useState<WindowItem<any>[]>([]);
     const openWindow = React.useCallback<WindowContextValues["openWindow"]>((component, title, ...rest) => {
-        setWindows(prev => [...prev, { id: nanoid(), component, title, props: rest[0], x: 0, y: 0 }]);
+        const id = nanoid();
+        setWindows(prev => [...prev, { id, component, title, props: rest[0], x: 0, y: 0 }]);
+        setFocusedId(id);
+    }, []);
+
+    const setFocusedWindow = React.useCallback((id: string) => {
+        setWindows(prev => {
+            // move focused window to the end of the array
+            const index = prev.findIndex(window => window.id === id);
+            if (index === -1) {
+                return prev;
+            }
+
+            const window = prev[index];
+            const newWindows = [...prev];
+            newWindows.splice(index, 1);
+
+            return [...newWindows, window];
+        });
+
+        setFocusedId(id);
     }, []);
 
     const handleDragEnd = React.useCallback((event: DragEndEvent) => {
@@ -54,13 +76,31 @@ export function WindowProvider({ children }: React.PropsWithChildren) {
 
     const handleClose = React.useCallback((id: string) => {
         setWindows(prev => prev.filter(window => window.id !== id));
+        setFocusedId(prev => (prev === id ? null : prev));
     }, []);
 
+    const contextValue = React.useMemo(
+        () => ({ focusedId, setFocus: setFocusedWindow, openWindow }),
+        [focusedId, openWindow, setFocusedWindow],
+    );
+
+    React.useEffect(() => {
+        if (focusedId === null && previousWindowCount.current !== windows.length) {
+            if (windows.length > 0) {
+                setFocusedId(windows[windows.length - 1].id);
+            } else {
+                setFocusedId("fixed");
+            }
+        }
+
+        previousWindowCount.current = windows.length;
+    }, [focusedId, windows]);
+
     return (
-        <WindowContext.Provider value={{ openWindow }}>
+        <WindowContext.Provider value={contextValue}>
             <DndContext id={id} sensors={sensors} onDragEnd={handleDragEnd} modifiers={[restrictToWindowEdges]}>
                 {children}
-                {windows.map(window => {
+                {windows.map((window, index) => {
                     const { component: Component, x, y } = window;
 
                     return (
@@ -70,6 +110,7 @@ export function WindowProvider({ children }: React.PropsWithChildren) {
                             id={window.id}
                             x={x}
                             y={y}
+                            z={index}
                             onClose={() => handleClose(window.id)}
                         >
                             <Component {...window.props} />
