@@ -22,10 +22,11 @@ export interface WindowItem<TProps> {
     props?: TProps;
     x: number;
     y: number;
+    isMeasured?: boolean;
 }
 
 export function WindowProvider({ children }: React.PropsWithChildren) {
-    const [focusedId, setFocusedId] = React.useState<string | null>(null);
+    const [focusedId, setFocusedId] = React.useState<string | null>("fixed");
     const mouseSensor = useSensor(MouseSensor, {});
     const touchSensor = useSensor(TouchSensor, {});
     const keyboardSensor = useSensor(KeyboardSensor, {});
@@ -79,6 +80,23 @@ export function WindowProvider({ children }: React.PropsWithChildren) {
         setFocusedId(prev => (prev === id ? null : prev));
     }, []);
 
+    const handleMeasure = React.useCallback((id: string, width: number, height: number) => {
+        setWindows(prev => {
+            return prev.map(w => {
+                if (w.id === id) {
+                    return {
+                        ...w,
+                        x: window.innerWidth / 2 - width / 2,
+                        y: window.innerHeight / 2 - height / 2,
+                        isMeasured: true,
+                    };
+                }
+
+                return w;
+            });
+        });
+    }, []);
+
     const contextValue = React.useMemo(
         () => ({ focusedId, setFocus: setFocusedWindow, openWindow }),
         [focusedId, openWindow, setFocusedWindow],
@@ -112,6 +130,8 @@ export function WindowProvider({ children }: React.PropsWithChildren) {
                             y={y}
                             z={index}
                             onClose={() => handleClose(window.id)}
+                            onMeasure={(width, height) => handleMeasure(window.id, width, height)}
+                            style={{ visibility: window.isMeasured ? undefined : "hidden" }}
                         >
                             <Component {...window.props} />
                         </Window>

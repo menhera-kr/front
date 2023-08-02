@@ -1,4 +1,6 @@
 import React from "react";
+import useMeasure from "react-use-measure";
+import { mergeRefs } from "react-merge-refs";
 import Image from "next/image";
 
 import { Box, Typography } from "@mui/material";
@@ -16,6 +18,8 @@ export interface WindowProps extends React.HTMLAttributes<HTMLDivElement> {
     y?: number;
     z?: number;
     onClose?(): void;
+    hidden?: boolean;
+    onMeasure?(width: number, height: number): void;
 }
 
 export function Window({
@@ -25,6 +29,7 @@ export function Window({
     variant = "float",
     id,
     onClose,
+    onMeasure,
     x = 0,
     y = 0,
     z = 0,
@@ -32,14 +37,31 @@ export function Window({
 }: React.PropsWithChildren<WindowProps>) {
     const RootComponent = variant === "float" ? FloatRoot : Root;
     const currentId = id ?? "fixed";
+    const [measureRef, { width, height }] = useMeasure();
     const { attributes, listeners, setNodeRef, transform } = useDraggable({
         id: currentId,
     });
+
+    const lastSize = React.useRef({ width, height });
 
     const { setFocus, focusedId } = useWindow();
 
     const posX = x + (transform?.x ?? 0);
     const posY = y + (transform?.y ?? 0);
+
+    React.useEffect(() => {
+        if (!onMeasure) {
+            return;
+        }
+
+        const oldSize = lastSize.current;
+        if (oldSize.width === width && oldSize.height === height) {
+            return;
+        }
+
+        onMeasure(width, height);
+        lastSize.current = { width, height };
+    }, [width, height, onMeasure]);
 
     const handleClose = React.useCallback(
         (e: React.MouseEvent) => {
@@ -68,15 +90,15 @@ export function Window({
 
     return (
         <RootComponent
-            ref={setNodeRef}
+            ref={mergeRefs([setNodeRef, measureRef])}
             data-testid="window"
             maxWidth={maxWidth}
-            style={{ top: posY, left: posX }}
             onFocus={moveWindowFocus}
             onMouseDown={moveWindowFocus}
             isFocused={currentId === focusedId}
             zIndex={z}
             {...rest}
+            style={{ top: posY, left: posX, ...rest.style }}
         >
             <TitleBar {...listeners} {...attributes}>
                 <Icon />
