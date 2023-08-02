@@ -36,4 +36,20 @@ describe("<Window />", () => {
             margin: "0 auto",
         });
     });
+
+    it("should call onClose prop callback when close button clicked", () => {
+        const onClose = jest.fn();
+
+        render(
+            <Window title="Title" onClose={onClose}>
+                Root
+            </Window>,
+            { wrapper: Wrapper },
+        );
+
+        const closeButton = screen.getByTestId("close");
+        closeButton.click();
+
+        expect(onClose).toHaveBeenCalled();
+    });
 });

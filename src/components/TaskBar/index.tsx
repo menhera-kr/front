@@ -24,7 +24,7 @@ export function TaskBar({}: TaskBarProps) {
             <Box mx={0.75}>
                 <TaskBarDivider />
             </Box>
-            <TaskBarItem active>Sophia Yamero</TaskBarItem>
+            <TaskBarItem active>menhera.kr</TaskBarItem>
             <Box flex="1 1 auto" />
             <TaskBarClock />
         </Root>
