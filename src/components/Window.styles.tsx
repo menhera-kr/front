@@ -5,8 +5,8 @@ export type RootProps = {
 };
 
 export const Root = styled.div<RootProps>`
-    width: 100%;
-    max-width: ${({ theme, maxWidth }) => (maxWidth ? theme.breakpoints.values[maxWidth] : "none")}px;
+    width: ${({ theme, maxWidth }) => (maxWidth ? theme.breakpoints.values[maxWidth] : "none")}px;
+    max-width: calc(100% - ${({ theme }) => theme.spacing(1)});
 
     margin: 0 auto;
     padding: ${({ theme }) => theme.spacing(0.5)};

@@ -3,24 +3,24 @@ import Image from "next/image";
 
 import { Box } from "@mui/material";
 
-import { Button } from "@components/Button";
+import { TaskBarButton } from "@components/TaskBarButton";
 import { Divider } from "@components/Divider";
-import { Root } from "@components/TaskBar.styles";
 import { TaskBarItem } from "@components/TaskBarItem";
 import { TaskBarClock } from "@components/TaskBarClock";
+import { Root } from "@components/TaskBar.styles";
 
 export interface TaskBarProps {}
 
 export function TaskBar({}: TaskBarProps) {
     return (
         <Root data-testid="taskbar">
-            <Button
+            <TaskBarButton
                 variant="centered"
                 minWidth={138}
                 startIcon={<Image alt="Windows 98 Logo" src="/assets/win98.png" width={32} height={24} />}
             >
                 시작
-            </Button>
+            </TaskBarButton>
             <Box mx={0.75}>
                 <Divider />
             </Box>
