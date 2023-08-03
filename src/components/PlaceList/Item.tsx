@@ -44,7 +44,12 @@ export function PlaceListItem({ place }: PlaceListItemProps) {
                     </Typography>
                     <Hidden mdDown>
                         <Box flex="1 1 auto" />
-                        <Typography variant="body1" color="text.secondary" data-testid="distance">
+                        <Typography
+                            variant="body1"
+                            color="text.secondary"
+                            data-testid="distance"
+                            sx={{ width: "auto !important" }}
+                        >
                             {distanceText}
                         </Typography>
                     </Hidden>
