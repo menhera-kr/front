@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const Root = styled.a`
+export const Root = styled.div`
     margin: 0;
     padding: ${({ theme }) => theme.spacing(0.5)};
     border: 2px solid ${({ theme }) => theme.palette.primary.main};
@@ -12,12 +12,14 @@ export const Root = styled.a`
     color: inherit;
     text-decoration: none;
 
-    &:hover {
-        box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.25);
-    }
+    &:not(:disabled):not([aria-disabled="true"]) {
+        &:hover {
+            box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.25);
+        }
 
-    &:active {
-        box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.25);
+        &:active {
+            box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.25);
+        }
     }
 `;
 

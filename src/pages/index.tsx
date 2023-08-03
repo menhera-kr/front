@@ -13,11 +13,13 @@ import { getPlaces } from "@queries/places";
 import { getCurrentLocation } from "@utils/geolocation";
 
 export default function Index() {
+    const [count] = useState(30);
     const [isGettingLocation, setIsGettingLocation] = useState(false);
     const [coords, setCoords] = useState<[number, number] | null>(null); // [latitude, longitude];
+    const [fetchCount, setFetchCount] = useState(0);
     const { data, isFetching, error } = useQuery({
-        queryKey: ["places", coords?.[0], coords?.[1]],
-        queryFn: () => getPlaces(coords?.[0] ?? 0, coords?.[1] ?? 0, 30),
+        queryKey: ["places", coords?.[0], coords?.[1], fetchCount],
+        queryFn: () => getPlaces(coords?.[0] ?? 0, coords?.[1] ?? 0, count),
         enabled: !!coords,
     });
 
@@ -27,6 +29,8 @@ export default function Index() {
 
         setCoords([latitude, longitude]);
         setIsGettingLocation(false);
+
+        setFetchCount(prev => prev + 1);
     };
 
     const loading = isGettingLocation || isFetching;
@@ -56,7 +60,7 @@ export default function Index() {
                 </Box>
             </Box>
             <Box maxWidth="md" mx="auto" mt={8} px={1}>
-                <PlaceList places={data ?? []} />
+                {(data || loading) && <PlaceList places={data} count={count} />}
             </Box>
         </Box>
     );

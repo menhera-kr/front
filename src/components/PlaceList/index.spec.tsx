@@ -6,7 +6,7 @@ import { Wrapper } from "@components/__test__/Wrapper";
 
 describe("<PlaceList />", () => {
     it("should render PlaceList component correctly", () => {
-        render(<PlaceList places={[]} />);
+        render(<PlaceList count={0} places={[]} />);
 
         const root = screen.getByTestId("place-list");
         expect(root).toBeInTheDocument();
@@ -15,6 +15,7 @@ describe("<PlaceList />", () => {
     it("should render given places", () => {
         render(
             <PlaceList
+                count={1}
                 places={[
                     {
                         기관명: "__MOCKED_NAME__",
@@ -36,5 +37,12 @@ describe("<PlaceList />", () => {
 
         const place = screen.getByText("__MOCKED_NAME__");
         expect(place).toBeInTheDocument();
+    });
+
+    it("should render skeleton when places prop is not provided", () => {
+        const { container } = render(<PlaceList count={5} />, { wrapper: Wrapper });
+
+        const skeleton = container.querySelectorAll('[data-testid="place-list-item"]');
+        expect(skeleton.length).toBe(5);
     });
 });

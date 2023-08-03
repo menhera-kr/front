@@ -17,4 +17,13 @@ export const theme = createTheme({
             primary: "#4c21c9",
         },
     },
+    components: {
+        MuiSkeleton: {
+            styleOverrides: {
+                root: {
+                    borderRadius: 0,
+                },
+            },
+        },
+    },
 });

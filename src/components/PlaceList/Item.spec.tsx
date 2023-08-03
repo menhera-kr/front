@@ -53,4 +53,11 @@ describe("<PlaceListItem />", () => {
         const distance = screen.getByTestId("distance");
         expect(distance).toHaveTextContent("1km");
     });
+
+    it("should render skeleton when place is not provided", () => {
+        const { container } = render(<PlaceListItem />, { wrapper: Wrapper });
+
+        const skeleton = container.querySelector(".MuiSkeleton-root");
+        expect(skeleton).toBeInTheDocument();
+    });
 });
