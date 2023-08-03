@@ -7,6 +7,16 @@ export const GlobalStyles = css`
         margin: 0;
         padding: 0;
     }
+
+    ::-moz-selection {
+        color: black;
+        background: #f4cbf7;
+    }
+
+    ::selection {
+        color: black;
+        background: #f4cbf7;
+    }
 `;
 
 export const Root = styled.div`
