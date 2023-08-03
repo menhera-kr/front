@@ -44,16 +44,28 @@ export const InnerContent = styled.div`
 `;
 
 export const TitleBar = styled.div`
+    height: ${({ theme }) => theme.spacing(4)};
+
     margin: ${({ theme }) => theme.spacing(0, 0, 0.5)};
     padding: ${({ theme }) => theme.spacing(0.5)};
     border: 2px solid ${({ theme }) => theme.palette.primary.main};
 
     display: flex;
     align-items: center;
+    box-sizing: border-box;
 
     background-color: #edc9ed;
 
     user-select: none;
+
+    ${({ theme }) => theme.breakpoints.down("md")} {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+
+        z-index: 10;
+    }
 `;
 
 export const Icon = styled.div`

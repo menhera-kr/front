@@ -21,6 +21,10 @@ export const Root = styled.div`
             box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.25);
         }
     }
+
+    p {
+        width: 100%;
+    }
 `;
 
 export const Content = styled.div`

@@ -11,7 +11,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 export function Button({ children, ...rest }: ButtonProps) {
     return (
         <Root {...rest}>
-            <Typography component="span" variant="body1">
+            <Typography component="span" variant="body1" color="text.primary">
                 {children}
             </Typography>
         </Root>

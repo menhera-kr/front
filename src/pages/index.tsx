@@ -52,7 +52,7 @@ export default function Index() {
                 <Box maxWidth="md" mx="auto" mt={8} px={1}>
                     {loading && (
                         <Typography variant="body1" sx={{ mb: 1 }}>
-                            <Skeleton width={400} />
+                            <Skeleton width="100%" />
                         </Typography>
                     )}
                     {!loading && data?.address && (

@@ -30,6 +30,10 @@ export const Root = styled.div`
     align-items: stretch;
 
     position: relative;
+
+    ${({ theme }) => theme.breakpoints.down("md")} {
+        height: 100svh;
+    }
 `;
 
 export const Main = styled.div`
@@ -39,5 +43,13 @@ export const Main = styled.div`
     flex-direction: column;
     flex: 1 1 auto;
 
+    position: relative;
+
     background: #f7defc url("/assets/pattern.png") repeat center;
+
+    ${({ theme }) => theme.breakpoints.down("md")} {
+        padding: ${({ theme }) => theme.spacing(0)};
+
+        background: #fff;
+    }
 `;

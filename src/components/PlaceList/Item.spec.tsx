@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { PlaceListItem } from "@components/PlaceList/Item";
 import { Wrapper } from "@components/__test__/Wrapper";
+import { createMatchMedia } from "@components/__test__/media";
 
 const MOCK_PLACE = {
     기관명: "__MOCKED_NAME__",
@@ -17,6 +18,10 @@ const MOCK_PLACE = {
 };
 
 describe("<PlaceListItem />", () => {
+    beforeAll(() => {
+        window.matchMedia = createMatchMedia(1920);
+    });
+
     it("should render PlaceListItem component correctly", () => {
         render(<PlaceListItem place={MOCK_PLACE} />, { wrapper: Wrapper });
 

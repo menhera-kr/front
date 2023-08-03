@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Skeleton, Typography } from "@mui/material";
+import { Box, Hidden, Skeleton, Typography } from "@mui/material";
 
 import { Content, Root } from "@components/PlaceList/Item.styles";
 
@@ -42,10 +42,12 @@ export function PlaceListItem({ place }: PlaceListItemProps) {
                     <Typography variant="body1" fontSize="1.25rem">
                         {nameText}
                     </Typography>
-                    <Box flex="1 1 auto" />
-                    <Typography variant="body1" color="text.secondary" data-testid="distance">
-                        {distanceText}
-                    </Typography>
+                    <Hidden mdDown>
+                        <Box flex="1 1 auto" />
+                        <Typography variant="body1" color="text.secondary" data-testid="distance">
+                            {distanceText}
+                        </Typography>
+                    </Hidden>
                 </Box>
                 <Box>
                     <Typography variant="body2" color="text.secondary" fontSize="1rem">
@@ -54,6 +56,11 @@ export function PlaceListItem({ place }: PlaceListItemProps) {
                     <Typography variant="body2" color="text.secondary" fontSize="1rem" sx={{ mt: 2 }}>
                         {typeText}
                     </Typography>
+                    <Hidden lgUp>
+                        <Typography variant="body1" color="text.secondary" data-testid="distance">
+                            {distanceText}
+                        </Typography>
+                    </Hidden>
                 </Box>
             </Content>
         </Root>

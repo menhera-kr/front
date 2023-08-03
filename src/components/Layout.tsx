@@ -5,6 +5,7 @@ import { Global } from "@emotion/react";
 import { Window } from "@components/Window";
 import { TaskBar } from "@components/TaskBar";
 import { GlobalStyles, Main, Root } from "@components/Layout.styles";
+import { Hidden } from "@mui/material";
 
 export interface LayoutProps {}
 
@@ -17,7 +18,9 @@ export function Layout({ children }: React.PropsWithChildren<LayoutProps>) {
                     {children}
                 </Window>
             </Main>
-            <TaskBar />
+            <Hidden mdDown>
+                <TaskBar />
+            </Hidden>
         </Root>
     );
 }
