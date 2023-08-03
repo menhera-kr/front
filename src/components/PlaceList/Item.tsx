@@ -19,7 +19,7 @@ export function PlaceListItem({ place }: PlaceListItemProps) {
     return (
         <Root data-testid="place-list-item">
             <Content>
-                <Box display="flex" alignItems="center">
+                <Box display="flex" alignItems="flex-start">
                     <Typography variant="body1" fontSize="1.25rem">
                         {place["기관명"]}
                     </Typography>
@@ -29,9 +29,12 @@ export function PlaceListItem({ place }: PlaceListItemProps) {
                         {distanceUnit}
                     </Typography>
                 </Box>
-                <Box display="flex" alignItems="center">
+                <Box>
                     <Typography variant="body2" color="text.secondary" fontSize="1rem">
                         {[place["주소"]["area1"], place["주소"]["area2"], place["주소"]["area3"]].join(" ")}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary" fontSize="1rem" sx={{ mt: 2 }}>
+                        {place["기관구분"]}
                     </Typography>
                 </Box>
             </Content>
