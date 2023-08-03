@@ -1,5 +1,5 @@
 import { KeyOf } from "./types";
-import { getErrorMessage } from "./utils";
+import { getErrorMessage } from "./errors";
 import { HttpError } from "./errors";
 
 export type Method = "GET" | "POST" | "PUT" | "DELETE";

@@ -20,7 +20,7 @@ export async function getCurrentLocation(
             return getCurrentLocation(false, timeout);
         }
 
-        if (e instanceof Error && "code" in e) {
+        if (e instanceof Object && "code" in e) {
             switch (e.code) {
                 case 3: // e.TIMEOUT:
                     throw new Error("위치 정보를 가져오는데 시간이 너무 오래 걸렸습니다.");

@@ -1,4 +1,4 @@
-import { getErrorMessage } from "./utils";
+import { getErrorMessage } from "@utils/errors";
 
 describe("getErrorMessage()", () => {
     it("should return the error message if the error is a string", () => {
