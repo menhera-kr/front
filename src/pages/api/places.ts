@@ -2,10 +2,6 @@ import { NextApiHandler } from "next";
 import haversine from "haversine-distance";
 import _ from "lodash";
 
-function toRad(value: number) {
-    return (value * Math.PI) / 180;
-}
-
 const place: NextApiHandler = async (req, res) => {
     const { lat, lng, count } = req.query;
     if (req.method !== "GET") {
@@ -37,8 +33,6 @@ const place: NextApiHandler = async (req, res) => {
     );
 
     const data = await response.json();
-
-    await new Promise(resolve => setTimeout(resolve, 1000));
 
     res.json(
         _.chain(data)
