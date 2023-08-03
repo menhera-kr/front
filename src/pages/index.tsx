@@ -62,7 +62,7 @@ export default function Index() {
                                 <Typography component="span" color="primary.main">
                                     {`'${data.address}'`}
                                 </Typography>
-                                &nbsp;주변 정신건강 시설 {count}곳
+                                &nbsp;주변 정신건강 시설
                             </Typography>
                         </Box>
                     )}
