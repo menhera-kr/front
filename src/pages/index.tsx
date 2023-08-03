@@ -11,6 +11,7 @@ import { getPlaces } from "@queries/places";
 
 import Image from "next/image";
 import { getErrorMessage } from "@utils/errors";
+import { PinIcon } from "@components/PinIcon";
 
 export default function Index() {
     const [count] = useState(30);
@@ -49,17 +50,22 @@ export default function Index() {
             </Box>
             {!error && (
                 <Box maxWidth="md" mx="auto" mt={8} px={1}>
-                    <Typography variant="body1" sx={{ mb: 1 }}>
-                        {loading && <Skeleton width={400} />}
-                        {!loading && data?.address && (
-                            <>
+                    {loading && (
+                        <Typography variant="body1" sx={{ mb: 1 }}>
+                            <Skeleton width={400} />
+                        </Typography>
+                    )}
+                    {!loading && data?.address && (
+                        <Box display="flex" alignItems="center" mb={1}>
+                            <PinIcon />
+                            <Typography variant="body1" sx={{ ml: 1 }}>
                                 <Typography component="span" color="primary.main">
                                     {`'${data.address}'`}
                                 </Typography>
                                 &nbsp;주변 정신건강 시설 {count}곳
-                            </>
-                        )}
-                    </Typography>
+                            </Typography>
+                        </Box>
+                    )}
                     {(data || loading) && <PlaceList places={data?.places} count={count} />}
                 </Box>
             )}
