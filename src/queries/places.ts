@@ -1,7 +1,8 @@
 import { APIRouteMap, Fetcher, Route } from "@utils/fetcher";
+import { Place } from "@utils/types";
 
 interface PlaceAPIRoutes extends APIRouteMap {
-    "/api/places": Route<{}, never, { lat: number; lng: number; count: number }>;
+    "/api/places": Route<{}, Place[], { lat: number; lng: number; count: number }>;
 }
 
 export function getPlaces(lat: number, lng: number, count: number) {

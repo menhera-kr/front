@@ -6,7 +6,11 @@ import { ThemeProvider } from "@mui/material";
 import { Layout } from "@components/Layout";
 import { theme } from "@styles/theme";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: { refetchOnWindowFocus: false },
+    },
+});
 
 export default function App({ pageProps, Component }: AppProps) {
     return (
