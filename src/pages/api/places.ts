@@ -36,6 +36,7 @@ const place: NextApiHandler = async (req, res) => {
 
     res.json(
         _.chain(data)
+            .uniqBy(x => x["기관명"])
             .map(x => ({
                 ...x,
                 distance: haversine(
