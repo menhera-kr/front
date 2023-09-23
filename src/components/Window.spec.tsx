@@ -2,8 +2,13 @@ import { render, screen } from "@testing-library/react";
 
 import { Window } from "@components/Window";
 import { Wrapper } from "@components/__test__/Wrapper";
+import { createMatchMedia } from "@components/__test__/media";
 
 describe("<Window />", () => {
+    beforeAll(() => {
+        window.matchMedia = createMatchMedia(1920);
+    });
+
     it("should render Window component properly", () => {
         render(<Window title="Title">Root</Window>, {
             wrapper: Wrapper,

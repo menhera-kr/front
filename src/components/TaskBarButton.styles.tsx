@@ -2,7 +2,8 @@ import styled from "@emotion/styled";
 
 export const Root = styled.button`
     margin: 0;
-    padding: ${({ theme }) => theme.spacing(0.5, 1)};
+    padding: ${({ theme }) => theme.spacing(0, 0.5)};
+
     border-width: 2px;
     border-style: solid;
     border-top-color: #fff;
@@ -15,10 +16,14 @@ export const Root = styled.button`
     display: flex;
     align-items: center;
 
-    background: #f5e0fb;
+    background: transparent;
     user-select: none;
 
     cursor: pointer;
+
+    img {
+        display: block;
+    }
 
     &:focus-visible {
         outline: none;
@@ -48,13 +53,5 @@ export const Root = styled.button`
 
     &[aria-pressed="true"] {
         color: ${({ theme }) => theme.palette.primary.dark};
-    }
-
-    &:disabled {
-        opacity: 0.5;
-        border-color: #f5e0fb;
-
-        pointer-events: none;
-        filter: grayscale(1);
     }
 `;
