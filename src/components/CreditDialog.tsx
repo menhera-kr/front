@@ -71,9 +71,11 @@ export function CreditDialog({ open, onClose }: CreditDialogProps) {
             </Hidden>
             <Hidden mdDown>
                 <Dialog fullWidth open={open} onClose={onClose} maxWidth="sm">
-                    <Window maxWidth="sm" contentAware={false} title="Credit">
-                        {content}
-                    </Window>
+                    <Box overflow="hidden">
+                        <Window maxWidth="sm" contentAware={false} title="Credit">
+                            {content}
+                        </Window>
+                    </Box>
                 </Dialog>
             </Hidden>
         </>
