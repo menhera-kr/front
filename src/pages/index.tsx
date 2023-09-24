@@ -1,21 +1,23 @@
-import { useState } from "react";
+import React from "react";
+import Image from "next/image";
 
 import { useQuery } from "@tanstack/react-query";
-import { Box, Skeleton, Stack, Typography } from "@mui/material";
+import { Box, Hidden, Skeleton, Stack, Typography } from "@mui/material";
 
 import { DitheredBackground } from "@components/DitheredBackground";
 import { Button } from "@components/Button";
 import { PlaceList } from "@components/PlaceList";
+import { PinIcon } from "@components/PinIcon";
+import { CreditDialog } from "@components/CreditDialog";
 
 import { getPlaces } from "@queries/places";
 
-import Image from "next/image";
 import { getErrorMessage } from "@utils/errors";
-import { PinIcon } from "@components/PinIcon";
 
 export default function Index() {
-    const [count] = useState(30);
-    const [fetchCount, setFetchCount] = useState(0);
+    const [count] = React.useState(30);
+    const [fetchCount, setFetchCount] = React.useState(0);
+    const [creditDialogOpen, setCreditDialogOpen] = React.useState(false);
     const { data, isFetching, error } = useQuery({
         queryKey: ["places", fetchCount],
         queryFn: () => getPlaces(count),
@@ -26,7 +28,23 @@ export default function Index() {
         setFetchCount(prev => prev + 1);
     };
 
+    const handleCreditClick = React.useCallback(() => {
+        setCreditDialogOpen(true);
+    }, []);
+
+    const handleCreditClose = React.useCallback(() => {
+        setCreditDialogOpen(false);
+    }, []);
+
     const loading = isFetching;
+    const buttons = (
+        <>
+            <Button onClick={handleCreditClick}>누가 만들었나요?</Button>
+            <Button disabled={loading} onClick={handleGeolocationSearchClick}>
+                내 위치에서 찾아보기
+            </Button>
+        </>
+    );
 
     return (
         <Box py={8} position="relative">
@@ -41,11 +59,16 @@ export default function Index() {
                     </Typography>
                 </Box>
                 <Box maxWidth="sm" px={2} mx="auto" mt={4}>
-                    <Stack direction="row" spacing={1} justifyContent="center">
-                        <Button disabled={loading} onClick={handleGeolocationSearchClick}>
-                            내 위치에서 찾아보기
-                        </Button>
-                    </Stack>
+                    <Hidden mdUp>
+                        <Stack spacing={1} alignItems="center">
+                            {buttons}
+                        </Stack>
+                    </Hidden>
+                    <Hidden mdDown>
+                        <Stack direction="row" spacing={1} justifyContent="center">
+                            {buttons}
+                        </Stack>
+                    </Hidden>
                 </Box>
             </Box>
             {!error && (
@@ -79,6 +102,7 @@ export default function Index() {
                     </Typography>
                 </Box>
             )}
+            <CreditDialog open={creditDialogOpen} onClose={handleCreditClose} />
         </Box>
     );
 }

@@ -1,15 +1,17 @@
 import React from "react";
 
+import Image from "next/image";
+
 import { Content, Icon, InnerContent, Root, TitleBar } from "@components/Window.styles";
 import { Box, Hidden, Typography } from "@mui/material";
-import Image from "next/image";
 
 export interface WindowProps {
     title: string;
     maxWidth?: "xs" | "sm" | "md" | "lg" | "xl" | false;
+    contentAware?: boolean;
 }
 
-export function Window({ title, children, maxWidth }: React.PropsWithChildren<WindowProps>) {
+export function Window({ title, children, maxWidth, contentAware = true }: React.PropsWithChildren<WindowProps>) {
     const titleBar = (
         <TitleBar>
             <Icon />
@@ -27,7 +29,8 @@ export function Window({ title, children, maxWidth }: React.PropsWithChildren<Wi
                 <Root maxWidth={maxWidth}>
                     {titleBar}
                     <Content>
-                        <InnerContent>{children}</InnerContent>
+                        {contentAware && <InnerContent>{children}</InnerContent>}
+                        {!contentAware && children}
                     </Content>
                 </Root>
             </Hidden>
