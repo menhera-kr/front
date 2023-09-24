@@ -16,7 +16,7 @@ export function PlaceListItem({ place }: PlaceListItemProps) {
     let typeText: React.ReactNode;
 
     if (place) {
-        let distance = Math.round(place.distance);
+        let distance = Math.round(place["주소"].distance * 1000);
         let distanceUnit = "m";
         if (distance >= 1000) {
             distance /= 1000;
