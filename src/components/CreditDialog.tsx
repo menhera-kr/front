@@ -63,19 +63,23 @@ export function CreditDialog({ open, onClose }: CreditDialogProps) {
                     maxWidth="sm"
                     sx={{ "& .MuiDialog-paper": { borderRadius: 0 } }}
                 >
-                    <DialogContent dividers>{content}</DialogContent>
-                    <DialogActions>
-                        <Button onClick={onClose}>닫기</Button>
-                    </DialogActions>
+                    <div data-testid="credit-dialog-root">
+                        <DialogContent dividers>{content}</DialogContent>
+                        <DialogActions>
+                            <Button onClick={onClose}>닫기</Button>
+                        </DialogActions>
+                    </div>
                 </Dialog>
             </Hidden>
             <Hidden mdDown>
                 <Dialog fullWidth open={open} onClose={onClose} maxWidth="sm">
-                    <Box overflow="hidden">
-                        <Window maxWidth="sm" contentAware={false} title="Credit">
-                            {content}
-                        </Window>
-                    </Box>
+                    <div data-testid="credit-dialog-root">
+                        <Box overflow="hidden">
+                            <Window maxWidth="sm" contentAware={false} title="Credit">
+                                {content}
+                            </Window>
+                        </Box>
+                    </div>
                 </Dialog>
             </Hidden>
         </>
