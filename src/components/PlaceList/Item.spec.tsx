@@ -11,8 +11,8 @@ const MOCK_PLACE = {
         area3: "역삼동",
         경도: "127.0317674",
         위도: "37.4923612",
+        distance: 0,
     },
-    distance: 0,
     기관구분: "test",
     홈페이지: "",
 };
@@ -34,7 +34,10 @@ describe("<PlaceListItem />", () => {
             <PlaceListItem
                 place={{
                     ...MOCK_PLACE,
-                    distance: 100.52,
+                    주소: {
+                        ...MOCK_PLACE["주소"],
+                        distance: 0.101,
+                    },
                 }}
             />,
             { wrapper: Wrapper },
@@ -49,7 +52,10 @@ describe("<PlaceListItem />", () => {
             <PlaceListItem
                 place={{
                     ...MOCK_PLACE,
-                    distance: 1000.52,
+                    주소: {
+                        ...MOCK_PLACE["주소"],
+                        distance: 1000.52,
+                    },
                 }}
             />,
             { wrapper: Wrapper },
