@@ -44,14 +44,15 @@ const place: NextApiHandler = async (req, res) => {
         return;
     }
 
-    const items = data.source;
+    const { data: items, address } = data.source;
 
-    res.json(
-        _.chain(items)
+    res.json({
+        address,
+        items: _.chain(items)
             .uniqBy(x => x["기관명"])
             .take(countNum)
             .value(),
-    );
+    });
 };
 
 export default place;

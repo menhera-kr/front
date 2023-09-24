@@ -3,23 +3,23 @@ import { Place } from "@utils/types";
 import { getCurrentLocation } from "@utils/geolocation";
 
 interface PlaceAPIRoutes extends APIRouteMap {
-    "/api/places": Route<{}, Place[], { lat: number; lng: number; count: number }>;
-    "/api/geolocation": Route<{}, { address: string }, { lat: number; lng: number }>;
+    "/api/places": Route<
+        {},
+        { items: Place[]; address: { area1: string; area2: string; area3: string } },
+        { lat: number; lng: number; count: number }
+    >;
 }
 
 export async function getPlaces(count: number) {
     const localFetcher = new Fetcher<PlaceAPIRoutes>("");
     const { latitude, longitude } = await getCurrentLocation();
 
-    const places = await localFetcher.fetchJson("/api/places", {
+    const { items: places, address } = await localFetcher.fetchJson("/api/places", {
         method: "GET",
         query: { lat: latitude, lng: longitude, count },
     });
 
-    const { address } = await localFetcher.fetchJson("/api/geolocation", {
-        method: "GET",
-        query: { lat: latitude, lng: longitude },
-    });
+    const addressResult = [address.area1, address.area2, address.area3].filter(Boolean).join(" ");
 
-    return { places, address };
+    return { places, address: addressResult };
 }
