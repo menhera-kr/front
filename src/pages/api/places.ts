@@ -25,26 +25,30 @@ const place: NextApiHandler = async (req, res) => {
         return;
     }
 
-    const response = await fetch(
-        "https://raw.githubusercontent.com/menhera-kr/data/main/data_preprocessed2_%EA%B2%BD%EA%B8%B0%EB%8F%84.json",
-        {
-            method: "GET",
-        },
-    );
+    const params = new URLSearchParams({ lat: latNum.toString(), lon: lngNum.toString() });
+    const response = await fetch(`https://${process.env.API_SERVER_URL}/api/geo/recommend?${params.toString()}`, {
+        method: "GET",
+    });
+
+    if (!response.ok) {
+        res.status(500).json({ error: "알 수 없는 오류가 발생 하였습니다." });
+        return;
+    }
 
     const data = await response.json();
+    if (data.status !== true) {
+        res.status(500).json({ error: data.message });
+        return;
+    } else if (!("source" in data)) {
+        res.status(500).json({ error: "알 수 없는 오류가 발생 하였습니다." });
+        return;
+    }
+
+    const items = data.source;
 
     res.json(
-        _.chain(data)
+        _.chain(items)
             .uniqBy(x => x["기관명"])
-            .map(x => ({
-                ...x,
-                distance: haversine(
-                    { lat: latNum, lng: lngNum },
-                    { lat: parseFloat(x["주소"]["위도"]), lng: parseFloat(x["주소"]["경도"]) },
-                ),
-            }))
-            .orderBy(x => x.distance, "asc")
             .take(countNum)
             .value(),
     );

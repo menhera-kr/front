@@ -8,15 +8,15 @@ interface PlaceAPIRoutes extends APIRouteMap {
 }
 
 export async function getPlaces(count: number) {
-    const fetcher = new Fetcher<PlaceAPIRoutes>("");
+    const localFetcher = new Fetcher<PlaceAPIRoutes>("");
     const { latitude, longitude } = await getCurrentLocation();
 
-    const places = await fetcher.fetchJson("/api/places", {
+    const places = await localFetcher.fetchJson("/api/places", {
         method: "GET",
         query: { lat: latitude, lng: longitude, count },
     });
 
-    const { address } = await fetcher.fetchJson("/api/geolocation", {
+    const { address } = await localFetcher.fetchJson("/api/geolocation", {
         method: "GET",
         query: { lat: latitude, lng: longitude },
     });

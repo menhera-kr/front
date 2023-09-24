@@ -9,7 +9,7 @@ export interface Place {
         area1: string;
         area2: string;
         area3: string;
+        distance: number;
     };
     홈페이지: string;
-    distance: number;
 }
