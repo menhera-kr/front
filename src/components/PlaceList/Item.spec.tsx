@@ -54,7 +54,7 @@ describe("<PlaceListItem />", () => {
                     ...MOCK_PLACE,
                     주소: {
                         ...MOCK_PLACE["주소"],
-                        distance: 1000.52,
+                        distance: 1,
                     },
                 }}
             />,
