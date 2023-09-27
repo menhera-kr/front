@@ -50,9 +50,21 @@ export default function Index() {
         <Box py={8} position="relative">
             <DitheredBackground />
             <Box position="relative" zIndex={1}>
-                <Typography variant="h2" textAlign="center" style={{ textShadow: "4px 4px 0 rgba(0, 0, 0, 0.25)" }}>
-                    mental.menhera.kr
-                </Typography>
+                <Hidden mdDown>
+                    <Typography variant="h2" textAlign="center" style={{ textShadow: "4px 4px 0 rgba(0, 0, 0, 0.25)" }}>
+                        mental.menhera.kr
+                    </Typography>
+                </Hidden>
+                <Hidden mdUp>
+                    <Typography
+                        variant="h2"
+                        fontSize="2rem"
+                        textAlign="center"
+                        style={{ textShadow: "4px 4px 0 rgba(0, 0, 0, 0.25)" }}
+                    >
+                        mental.menhera.kr
+                    </Typography>
+                </Hidden>
                 <Box display="flex" flexDirection="column" alignItems="center">
                     <Typography variant="body1" textAlign="center">
                         내 주변 정신건강 시설 정보 찾기.
