@@ -51,7 +51,7 @@ export default function Index() {
             <DitheredBackground />
             <Box position="relative" zIndex={1}>
                 <Typography variant="h2" textAlign="center" style={{ textShadow: "4px 4px 0 rgba(0, 0, 0, 0.25)" }}>
-                    menhera.kr
+                    mental.menhera.kr
                 </Typography>
                 <Box display="flex" flexDirection="column" alignItems="center">
                     <Typography variant="body1" textAlign="center">

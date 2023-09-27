@@ -24,7 +24,7 @@ export function TaskBar({}: TaskBarProps) {
             <Box mx={0.75}>
                 <Divider />
             </Box>
-            <TaskBarItem active>menhera.kr</TaskBarItem>
+            <TaskBarItem active>mental.menhera.kr</TaskBarItem>
             <Box flex="1 1 auto" />
             <TaskBarClock />
         </Root>

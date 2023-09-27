@@ -14,6 +14,12 @@ export function Layout({ children }: React.PropsWithChildren<LayoutProps>) {
     return (
         <Root>
             <Head>
+                <title>mental.menhera.kr</title>
+                <meta name="description" content="내 주변 정신건강 시설 정보 찾기." />
+                <link rel="icon" href="/favicon.ico" />
+                <meta name="theme-color" content="#4c21c9" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <meta name="twitter:card" content="summary_large_image" />
                 <meta property="og:type" content="website" />
                 <meta property="og:url" content="https://mental.menhera.kr" />
                 <meta property="og:title" content="mental.menhera.kr" />
@@ -26,7 +32,7 @@ export function Layout({ children }: React.PropsWithChildren<LayoutProps>) {
             </Head>
             <Global styles={GlobalStyles} />
             <Main>
-                <Window title="menhera.kr" maxWidth="lg">
+                <Window title="mental.menhera.kr" maxWidth="lg">
                     {children}
                 </Window>
             </Main>
