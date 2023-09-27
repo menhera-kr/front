@@ -17,7 +17,7 @@ export function Layout({ children }: React.PropsWithChildren<LayoutProps>) {
                 <meta property="og:type" content="website" />
                 <meta property="og:url" content="https://mental.menhera.kr" />
                 <meta property="og:title" content="mental.menhera.kr" />
-                <meta property="og:image" content="https://example.com/assets/og.png" />
+                <meta property="og:image" content="https://mental.menhera.kr/assets/og.png" />
                 <meta property="og:description" content="내 주변 정신건강 시설 정보 찾기." />
                 <meta property="og:site_name" content="mental.menhera.kr" />
                 <meta property="og:locale" content="ko_KR" />
